@@ -26,3 +26,34 @@ print(isValid("()[]{}"))   # Output: True
 print(isValid("(]"))       # Output: False
 print(isValid("([)]"))     # Output: False
 print(isValid("{[]}"))     # Output: True
+print(isValid("{[]}"))     # Output: True
+
+
+
+def isValidWithChar(s: str) -> bool:
+
+    bracket_map = {"]": "[", "}": "{", ")": "("}
+    stack = []
+
+    open_brackets = set(bracket_map.values())
+    close_brackets = set(bracket_map.keys())
+
+    for char in s:
+        if char in open_brackets:
+            stack.append(char)
+        elif char in close_brackets:
+
+            top_char = stack.pop() if stack else "#"
+
+            if top_char != bracket_map[char]:
+                return False
+
+    return len(stack) == 0
+
+print("-----------Valid with characters------------")
+print(isValidWithChar("{[aaa]}"))     # Output: True
+print(isValidWithChar("d(ds)asdd"))       # Output: True
+print(isValidWithChar("d()[d]{}"))   # Output: True
+print(isValidWithChar("(d]"))       # Output: False
+print(isValidWithChar("([d)]"))     # Output: False
+print(isValidWithChar("{[d]}"))     # Output: True
